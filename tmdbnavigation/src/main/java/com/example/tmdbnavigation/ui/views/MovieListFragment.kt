@@ -1,4 +1,4 @@
-package com.example.tmdbnavigation.ui.view
+package com.example.tmdbnavigation.ui.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.tmdbnavigation.databinding.FragmentMovieListBinding
-import com.example.tmdbnavigation.ui.viewmodel.MovieListViewModel
+import com.example.tmdbnavigation.ui.viewmodels.MovieListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieListFragment : Fragment() {
 
     private val viewModel: MovieListViewModel by viewModels()

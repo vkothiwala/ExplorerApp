@@ -1,6 +1,6 @@
-package com.example.tmdbnavigation.ui.model
+package com.example.tmdbnavigation.ui.models
 
-import com.example.tmdbnavigation.domain.Movie
+import com.example.tmdbnavigation.domain.models.Movie
 
 data class MovieListUiState(
     val isLoading: Boolean,

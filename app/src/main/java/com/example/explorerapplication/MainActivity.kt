@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.explorerapplication.databinding.ActivityMainBinding
-import com.example.tmdbnavigation.ui.view.MoviesActivity
+import com.example.tmdbnavigation.ui.views.MoviesActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

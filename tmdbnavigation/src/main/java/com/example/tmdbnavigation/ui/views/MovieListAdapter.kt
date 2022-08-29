@@ -1,4 +1,4 @@
-package com.example.tmdbnavigation.ui.view
+package com.example.tmdbnavigation.ui.views
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdbnavigation.R
-import com.example.tmdbnavigation.domain.Movie
+import com.example.tmdbnavigation.domain.models.Movie
 
 class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
