@@ -3,8 +3,10 @@ package com.example.tmdbnavigation.ui.views
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.tmdbnavigation.R
 import com.example.tmdbnavigation.domain.models.Movie
 
@@ -32,13 +34,19 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>(
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val movieName = itemView.findViewById<TextView>(R.id.movie_name)
-        private val movieDescription = itemView.findViewById<TextView>(R.id.movie_description)
+        private val movieReleaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
+        private val movieImage = itemView.findViewById<ImageView>(R.id.movie_image)
 
         fun bind(movie: Movie) {
             with(movie) {
-                movieName.text = name
-                movieDescription.text = description
+                movieName.text = title
+                movieReleaseDate.text = release_date
+                Glide.with(movieImage).load("$PATH$poster_path").into(movieImage)
             }
+        }
+
+        companion object {
+            const val PATH = "https://image.tmdb.org/t/p/original/"
         }
     }
 }
