@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.tmdbnavigation.R
 import com.example.tmdbnavigation.domain.models.Movie
+import com.example.tmdbnavigation.ui.loadUrl
 
 class MovieListAdapter(private val onMovieClick: (Int) -> Unit) :
     RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
@@ -49,12 +49,12 @@ class MovieListAdapter(private val onMovieClick: (Int) -> Unit) :
             with(movie) {
                 movieName.text = title
                 movieReleaseDate.text = release_date
-                Glide.with(movieImage).load("$PATH$poster_path").into(movieImage)
+                poster_path?.let { movieImage.loadUrl(it) }
             }
         }
 
         companion object {
-            const val PATH = "https://image.tmdb.org/t/p/original/"
+
         }
     }
 }

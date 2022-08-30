@@ -18,11 +18,16 @@ class MovieRepositoryImpl @Inject constructor(
             val response = remoteSource.getMovies()
             if (response.isSuccessful && response.code() == 200 && response.body() != null) {
                 val result = response.body()!!.results.map { it.toMovie() }
+                Log.d(TAG, "$localSource, $result")
                 localSource.cacheMovies(result)
             }
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
         }
         return localSource.getMovies()
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): Movie {
+        return localSource.getMovies().find { it.id == movieId }!!
     }
 }

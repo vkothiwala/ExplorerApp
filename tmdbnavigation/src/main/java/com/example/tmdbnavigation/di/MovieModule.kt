@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 private const val BASE_URL = "https://api.themoviedb.org/3/movie/"
 
@@ -25,6 +26,7 @@ abstract class MovieBindModule {
     @Binds
     abstract fun bindMovieRemoteSource(moviesRemoteSourceImpl: MovieRemoteSourceImpl): MovieRemoteSource
 
+    @Singleton
     @Binds
     abstract fun bindMovieLocalSource(movieLocalSourceImpl: MovieLocalSourceImpl): MovieLocalSource
 }
@@ -33,6 +35,7 @@ abstract class MovieBindModule {
 @InstallIn(SingletonComponent::class)
 class MovieProvideModule {
 
+    @Singleton
     @Provides
     fun provideMovieApi(): MovieAPI {
         return getRetrofit().create(MovieAPI::class.java)
