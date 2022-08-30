@@ -37,7 +37,9 @@ class MovieListFragment : Fragment() {
 
     private fun initViews() {
         with(binding.movieList) {
-            movieListAdapter = MovieListAdapter()
+            movieListAdapter = MovieListAdapter {
+
+            }
             adapter = movieListAdapter
             addItemDecoration(
                 DividerItemDecoration(

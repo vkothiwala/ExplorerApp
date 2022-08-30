@@ -10,14 +10,17 @@ import com.bumptech.glide.Glide
 import com.example.tmdbnavigation.R
 import com.example.tmdbnavigation.domain.models.Movie
 
-class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+class MovieListAdapter(private val onMovieClick: (Int) -> Unit) :
+    RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     private var movieList: List<Movie> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
-        return MovieViewHolder(view)
+        return MovieViewHolder(view) {
+            onMovieClick(movieList[it].id)
+        }
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -31,11 +34,16 @@ class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>(
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MovieViewHolder(itemView: View, clickItemPosition: (Int) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
 
         private val movieName = itemView.findViewById<TextView>(R.id.movie_name)
         private val movieReleaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
         private val movieImage = itemView.findViewById<ImageView>(R.id.movie_image)
+
+        init {
+            itemView.setOnClickListener { clickItemPosition(adapterPosition) }
+        }
 
         fun bind(movie: Movie) {
             with(movie) {
