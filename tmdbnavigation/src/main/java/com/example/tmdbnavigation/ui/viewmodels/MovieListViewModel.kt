@@ -11,8 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieListViewModel @Inject constructor(private val repository: MovieRepository) :
-    ViewModel() {
+class MovieListViewModel @Inject constructor(
+    private val repository: MovieRepository
+) : ViewModel() {
 
     private val _movieListUiState: MutableLiveData<MovieListUiState> = MutableLiveData()
     val movieListUiState: LiveData<MovieListUiState> = _movieListUiState

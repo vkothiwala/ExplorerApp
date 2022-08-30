@@ -7,25 +7,22 @@ import com.example.tmdbnavigation.domain.models.Movie
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val remoteSource: MoviesRemoteSource
+    private val remoteSource: MovieRemoteSource,
+    private val localSource: MovieLocalSource
 ) : MovieRepository {
 
     private val TAG = "MovieRepositoryImpl"
 
     override suspend fun getMovies(): List<Movie> {
-        return try {
+        try {
             val response = remoteSource.getMovies()
-            val result =
-                if (response.isSuccessful && response.code() == 200 && response.body() != null) {
-                    response.body()!!.results.map { it.toMovie() }
-                } else {
-                    emptyList()
-                }
-            Log.d(TAG, result.toString())
-            result
+            if (response.isSuccessful && response.code() == 200 && response.body() != null) {
+                val result = response.body()!!.results.map { it.toMovie() }
+                localSource.cacheMovies(result)
+            }
         } catch (e: Exception) {
             Log.d(TAG, e.toString())
-            emptyList()
         }
+        return localSource.getMovies()
     }
 }

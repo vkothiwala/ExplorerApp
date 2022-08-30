@@ -5,9 +5,9 @@ import com.example.tmdbnavigation.data.service.MovieAPI
 import retrofit2.Response
 import javax.inject.Inject
 
-class MoviesRemoteSourceImpl @Inject constructor(
+class MovieRemoteSourceImpl @Inject constructor(
     private val movieApi: MovieAPI
-) : MoviesRemoteSource {
+) : MovieRemoteSource {
 
     override suspend fun getMovies(): Response<MoviesApiResponse> {
         return movieApi.getMovies()

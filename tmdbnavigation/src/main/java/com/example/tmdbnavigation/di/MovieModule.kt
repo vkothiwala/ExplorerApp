@@ -1,9 +1,7 @@
 package com.example.tmdbnavigation.di
 
 import com.example.tmdbnavigation.data.service.MovieAPI
-import com.example.tmdbnavigation.data.sources.MovieRepositoryImpl
-import com.example.tmdbnavigation.data.sources.MoviesRemoteSource
-import com.example.tmdbnavigation.data.sources.MoviesRemoteSourceImpl
+import com.example.tmdbnavigation.data.sources.*
 import com.example.tmdbnavigation.domain.MovieRepository
 import dagger.Binds
 import dagger.Module
@@ -25,7 +23,10 @@ abstract class MovieBindModule {
     abstract fun bindMovieRepository(movieRepositoryImpl: MovieRepositoryImpl): MovieRepository
 
     @Binds
-    abstract fun bindMovieRemoteSource(moviesRemoteSourceImpl: MoviesRemoteSourceImpl): MoviesRemoteSource
+    abstract fun bindMovieRemoteSource(moviesRemoteSourceImpl: MovieRemoteSourceImpl): MovieRemoteSource
+
+    @Binds
+    abstract fun bindMovieLocalSource(movieLocalSourceImpl: MovieLocalSourceImpl): MovieLocalSource
 }
 
 @Module
