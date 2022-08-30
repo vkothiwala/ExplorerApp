@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.tmdbnavigation.databinding.FragmentMovieListBinding
 import com.example.tmdbnavigation.ui.viewmodels.MovieListViewModel
@@ -37,7 +38,12 @@ class MovieListFragment : Fragment() {
 
     private fun initViews() {
         with(binding.movieList) {
-            movieListAdapter = MovieListAdapter()
+            movieListAdapter = MovieListAdapter {
+                val action =
+                    MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment()
+                action.movieId = it
+                findNavController().navigate(action)
+            }
             adapter = movieListAdapter
             addItemDecoration(
                 DividerItemDecoration(

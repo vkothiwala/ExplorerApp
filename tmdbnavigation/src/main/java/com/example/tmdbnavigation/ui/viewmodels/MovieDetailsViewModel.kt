@@ -5,25 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tmdbnavigation.domain.MovieRepository
-import com.example.tmdbnavigation.ui.models.MovieListUiState
+import com.example.tmdbnavigation.domain.models.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieListViewModel @Inject constructor(
+class MovieDetailsViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    private val _movieListUiState: MutableLiveData<MovieListUiState> = MutableLiveData()
-    val movieListUiState: LiveData<MovieListUiState> = _movieListUiState
+    private val _movieDetail: MutableLiveData<Movie> = MutableLiveData()
+    val movieDetail: LiveData<Movie> = _movieDetail
 
-    internal fun start() {
-        _movieListUiState.value = MovieListUiState(true, emptyList(), false)
-
+    internal fun getMovieDetails(movieId: Int) {
         viewModelScope.launch {
-            val movies = repository.getMovies()
-            _movieListUiState.value = MovieListUiState(false, movies, false)
+            _movieDetail.value = repository.getMovieDetails(movieId)
         }
     }
 }
